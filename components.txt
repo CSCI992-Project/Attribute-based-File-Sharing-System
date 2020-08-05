@@ -1,0 +1,6 @@
+There are five components in this project:
+1. UI design
+2. Network Framework
+3. Database design
+4. Encryption Technology
+5. Network Security
