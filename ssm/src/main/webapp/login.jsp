@@ -1,6 +1,8 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF_8">
 <title>Abe</title>
 <!-- 引入EasyUI的相关css和js文件 -->
 <link href="EasyUI/themes/material/easyui.css" rel="stylesheet"
@@ -19,16 +21,16 @@
 
       function checkUserLogin() {
 			$("#userLoginForm").form("submit", {
-				// 向控制器类AdminInfoController中login方法发送请求
+				// 向控制器类UserInfoController中login方法发送请求
 				url : 'userinfo/login', 
 				success : function(result) {
 					var result = eval('(' + result + ')');
 					if (result.success == 'true') {
-						window.location.href = 'index.jsp';
+						window.location.href = 'userIndex.jsp';
 						$("#userLoginDlg").dialog("close");
 					} else {
 						$.messager.show({
-							title : "Tips",
+							title : "Tipes",
 							msg : result.message
 						});
 					}

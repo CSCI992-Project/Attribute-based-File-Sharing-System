@@ -14,7 +14,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	@Override
 	public UserInfo login(UserInfo ui) {
-	
 		return userInfoDao.selectByNameAndPwd(ui);
 	}
 	
