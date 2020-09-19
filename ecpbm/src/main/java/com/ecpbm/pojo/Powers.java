@@ -8,7 +8,7 @@ public class Powers {
 		return ui;
 	}
 
-	public void setAi(UserInfo ui) {
+	public void setUi(UserInfo ui) {
 		this.ui = ui;
 	}
 

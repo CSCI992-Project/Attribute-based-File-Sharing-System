@@ -18,4 +18,22 @@ public interface UserInfoService {
 	
 	//用户计数
 	Integer count(Map<String, Object> params);
+	
+	//select user id by user name
+	Integer findUserId(String userName);
+	
+	//add user
+	void addUserInfo(UserInfo userInfo);
+	
+	//add user power
+	void addUserPowers(Integer uid, Integer fid);
+	
+	//add attributes
+	void addAttributes(Integer uid, Integer cid, Integer aid);
+	
+	//update user information
+	void editUserInfo(UserInfo userInfo);
+	
+	//delete user
+	void deleteUserInfo(Integer id);
 }

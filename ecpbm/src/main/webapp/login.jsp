@@ -12,8 +12,16 @@
 <script src="EasyUI/jquery.easyui.min.js" type="text/javascript"></script>
 <script src="EasyUI/easyui-lang-zh_CN.js" type="text/javascript"></script>
 </head>
-
-<body>
+<style type="text/css">
+	#footer {
+        width: 100%;
+        height: 50px;
+        position: fixed;
+        left:810px;
+        bottom: 0;
+    }
+</style>
+<body background="background.jpg">
 	<script type="text/javascript">
 		function clearForm() {
 			$('#userLoginForm').form('clear');
@@ -39,7 +47,7 @@
 		}
 	</script>
 	<div id="userLoginDlg" class="easyui-dialog"
-		style="left: 550px; top: 200px;width: 300;height: 200"
+		style="left: 763px; top: 380px;width: 300;height: 200"
 		data-options="title:'Platform Login',buttons:'#bb',modal:true">
 		<form id="userLoginForm" method="post">
 			<table style="margin:20px;font-size: 13;">
@@ -61,6 +69,8 @@
 			onclick="checkUserLogin()">login</a> <a href="javascript:void(0)"
 			class="easyui-linkbutton" onclick="clearForm();">reset</a>
 	</div>
-
+	<div id="footer">
+      University of Wollongong | <a href="aboutUs.jsp">About us</a>
+    </div>
 </body>
 </html>

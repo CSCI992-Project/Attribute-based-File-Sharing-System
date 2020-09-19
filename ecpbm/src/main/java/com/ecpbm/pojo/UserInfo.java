@@ -11,6 +11,36 @@ public class UserInfo {
 	private String phone;
 	//关联属性
 	private List<Functions> fs;
+	private Integer category_id;
+	private Integer attribute_id;
+	private String category;
+	private String attribute;
+	
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	public String getAttribute() {
+		return attribute;
+	}
+	public void setAttribute(String attribute) {
+		this.attribute = attribute;
+	}
+	
+	public Integer getCategory_id() {
+		return category_id;
+	}
+	public void setCategory_id(Integer category_id) {
+		this.category_id = category_id;
+	}
+	public Integer getAttribute_id() {
+		return attribute_id;
+	}
+	public void setAttribute_id(Integer attribute_id) {
+		this.attribute_id = attribute_id;
+	}
 	
 	public List<Functions> getFs() {
 		return fs;

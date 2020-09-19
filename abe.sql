@@ -21,32 +21,32 @@ USE `abe`;
 DROP TABLE IF EXISTS `attribute`;
 
 CREATE TABLE `attribute` (
-  `idattribute` int NOT NULL,
-  `idcatagory` int NOT NULL,
-  `attribute` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idattribute`),
-  UNIQUE KEY `idattribute_UNIQUE` (`idattribute`),
-  KEY `att_idx` (`idcatagory`),
-  CONSTRAINT `att` FOREIGN KEY (`idcatagory`) REFERENCES `catagory` (`idcatagory`)
+  `attribute_id` int NOT NULL,
+  `category_id` int NOT NULL,
+  `attribute_name` varchar(45) CHARACTER SET gbk COLLATE gbk_chinese_ci DEFAULT NULL,
+  PRIMARY KEY (`attribute_id`),
+  UNIQUE KEY `idattribute_UNIQUE` (`attribute_id`),
+  KEY `att_idx` (`category_id`),
+  CONSTRAINT `att` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=gbk;
 
 /*Data for the table `attribute` */
 
-insert  into `attribute`(`idattribute`,`idcatagory`,`attribute`) values (1,1,'csci');
+insert  into `attribute`(`attribute_id`,`category_id`,`attribute_name`) values (0,2,'isit'),(1,1,'csci'),(2,2,'925'),(3,1,'uow');
 
-/*Table structure for table `catagory` */
+/*Table structure for table `category` */
 
-DROP TABLE IF EXISTS `catagory`;
+DROP TABLE IF EXISTS `category`;
 
-CREATE TABLE `catagory` (
-  `idcatagory` int NOT NULL,
-  `catagory_name` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idcatagory`)
+CREATE TABLE `category` (
+  `category_id` int NOT NULL,
+  `category_name` varchar(45) CHARACTER SET gbk COLLATE gbk_chinese_ci DEFAULT NULL,
+  PRIMARY KEY (`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=gbk;
 
-/*Data for the table `catagory` */
+/*Data for the table `category` */
 
-insert  into `catagory`(`idcatagory`,`catagory_name`) values (1,'student'),(2,'teacher');
+insert  into `category`(`category_id`,`category_name`) values (1,'student'),(2,'teacher');
 
 /*Table structure for table `files` */
 
@@ -96,7 +96,7 @@ CREATE TABLE `powers` (
 
 /*Data for the table `powers` */
 
-insert  into `powers`(`uid`,`fid`) values (1,3),(1,5),(1,7),(1,8),(2,3),(2,5),(2,8);
+insert  into `powers`(`uid`,`fid`) values (1,3),(1,5),(1,7),(1,8),(2,3),(2,5),(2,8),(32,3),(32,5),(32,8),(33,3),(33,5),(33,8),(34,3),(34,5),(34,8),(35,3),(35,5),(35,8),(36,3),(36,5),(36,8),(37,3),(37,5),(37,8),(38,3),(38,5),(38,8),(39,3),(39,5),(39,8),(40,3),(40,5),(40,8),(41,3),(41,5),(41,8),(42,3),(42,5),(42,8),(43,3),(43,5),(43,8),(45,3),(45,5),(45,8),(46,3),(46,5),(46,8);
 
 /*Table structure for table `user_att` */
 
@@ -104,14 +104,14 @@ DROP TABLE IF EXISTS `user_att`;
 
 CREATE TABLE `user_att` (
   `user_id` int NOT NULL,
-  `catagory_id` int DEFAULT NULL,
+  `category_id` int DEFAULT NULL,
   `attribute_id` int DEFAULT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=gbk;
 
 /*Data for the table `user_att` */
 
-insert  into `user_att`(`user_id`,`catagory_id`,`attribute_id`) values (1,1,1);
+insert  into `user_att`(`user_id`,`category_id`,`attribute_id`) values (1,1,1),(2,2,2),(34,1,1),(35,NULL,NULL),(36,NULL,NULL),(37,NULL,NULL),(39,1,1),(40,1,3),(41,1,3),(42,1,3),(43,1,3),(45,1,1),(46,1,1);
 
 /*Table structure for table `user_info` */
 
@@ -126,11 +126,11 @@ CREATE TABLE `user_info` (
   `phone` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=gbk;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=gbk;
 
 /*Data for the table `user_info` */
 
-insert  into `user_info`(`id`,`userName`,`password`,`userType`,`email`,`phone`) values (1,'xk','1',2,'kx876@uowmail.edu.au','88888888'),(2,'mm','123456',2,NULL,NULL),(3,'anqi','123456',2,NULL,NULL),(4,'zh','123456',2,NULL,NULL);
+insert  into `user_info`(`id`,`userName`,`password`,`userType`,`email`,`phone`) values (1,'xk','1',1,'kx876@uowmail.edu.au','88888888'),(2,'mm','123456',2,'12','123'),(40,'zh','1',2,'111@qq.com','1111111'),(41,'wm','1',2,'32','21312'),(42,'wh','1',2,'11111','33333333'),(43,'wa1','1',2,'123','12345'),(45,'wa2','123',2,'123','123');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

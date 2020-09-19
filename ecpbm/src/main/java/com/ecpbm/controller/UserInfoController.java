@@ -98,6 +98,59 @@ public class UserInfoController {
 		
 	}
 	
+	//add user info
+	@RequestMapping(value = "/addUserinfo", produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String addUserInfo(UserInfo ui) {
+		String str = "";
+		System.out.println(ui.getCategory_id());
+		try {
+			userInfoService.addUserInfo(ui);
+			str = "{\"success\":\"true\",\"message\":\"User information added successfully!\"}";
+		} catch (Exception e) {
+			str = "{\"success\":\"false\",\"message\":\"Failed to add user information!\"}";
+		}
+		if (ui.getUserName() != null) {
+			int user_id = userInfoService.findUserId(ui.getUserName());
+			userInfoService.addUserPowers(user_id, 3);
+			userInfoService.addUserPowers(user_id, 5);
+			userInfoService.addUserPowers(user_id, 8);
+			if (ui.getCategory_id() !=null) {
+			userInfoService.addAttributes(user_id, ui.getCategory_id(), ui.getAttribute_id());
+			}
+		}
+		return str;	
+	}
+	
+	//update user info
+	@RequestMapping(value = "updateUserinfo", produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String editUserInfo(UserInfo ui) {
+		String str = "";
+		try {
+			userInfoService.editUserInfo(ui);;
+			str = "{\"success\":\"true\",\"message\":\"User information updating successfully!\"}";
+		} catch (Exception e) {
+			str = "{\"success\":\"false\",\"message\":\"Failed to update user information!\"}";
+		}
+		return str;	
+	}
+	
+	//delete user info
+	@RequestMapping(value = "/deleteUserInfo", produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String deleteUserInfo(@RequestParam(value = "id") String id) {
+		String str = "";
+		try {
+			userInfoService.deleteUserInfo(Integer.parseInt(id));
+			str = "{\"success\":\"true\",\"message\":\"User information deleted successfully!\"}";
+		} catch (Exception e) {
+			str = "{\"success\":\"false\",\"message\":\"Failed to delete user information!\"}";
+		}
+		return str;		
+	}
+	
+	//log out
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	@ResponseBody
 	public String logout(SessionStatus status) {

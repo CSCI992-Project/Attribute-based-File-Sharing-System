@@ -17,15 +17,15 @@ import com.ecpbm.service.UserInfoService;
 
 @Service("userInfoService")
 @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT)
-public class UserInfoServiceImpl implements UserInfoService{
+public class UserInfoServiceImpl implements UserInfoService {
 	@Autowired
 	private UserInfoDao userInfoDao;
-	
+
 	@Override
 	public UserInfo login(UserInfo ui) {
-		return userInfoDao.selectByNameAndPwd(ui);	
+		return userInfoDao.selectByNameAndPwd(ui);
 	}
-	
+
 	@Override
 	public UserInfo getUserInfoAndFunctions(Integer id) {
 		return userInfoDao.selectById(id);
@@ -45,9 +45,46 @@ public class UserInfoServiceImpl implements UserInfoService{
 	}
 
 	@Override
-	public Integer count (Map<String, Object> params) {
+	public Integer count(Map<String, Object> params) {
 		// TODO Auto-generated method stub
 		return userInfoDao.count(params);
+	}
+
+	@Override
+	public void deleteUserInfo(Integer id) {
+		// TODO Auto-generated method stub
+		userInfoDao.deleteUserInfo(id);
+	}
+
+	@Override
+	public void addUserInfo(UserInfo userInfo) {
+		// TODO Auto-generated method stub
+		userInfoDao.add(userInfo);
+	}
+
+	@Override
+	public void addUserPowers(Integer uid, Integer fid) {
+		// TODO Auto-generated method stub
+		userInfoDao.addPowers(uid, fid);
+	}
+
+	@Override
+	public Integer findUserId(String userName) {
+		// TODO Auto-generated method stub
+		return userInfoDao.findUserId(userName);
+	}
+
+	@Override
+	public void addAttributes(Integer uid, Integer cid, Integer aid) {
+		// TODO Auto-generated method stub
+		userInfoDao.addAttributes(uid, cid, aid);
+	}
+
+	@Override
+	public void editUserInfo(UserInfo userInfo) {
+		// TODO Auto-generated method stub
+		userInfoDao.edit(userInfo);
+		userInfoDao.updateAtt(userInfo);
 	}
 
 }
