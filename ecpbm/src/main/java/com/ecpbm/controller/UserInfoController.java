@@ -103,7 +103,6 @@ public class UserInfoController {
 	@ResponseBody
 	public String addUserInfo(UserInfo ui) {
 		String str = "";
-		System.out.println(ui.getCategory_id());
 		try {
 			userInfoService.addUserInfo(ui);
 			str = "{\"success\":\"true\",\"message\":\"User information added successfully!\"}";
@@ -128,7 +127,7 @@ public class UserInfoController {
 	public String editUserInfo(UserInfo ui) {
 		String str = "";
 		try {
-			userInfoService.editUserInfo(ui);;
+			userInfoService.editUserInfo(ui);
 			str = "{\"success\":\"true\",\"message\":\"User information updating successfully!\"}";
 		} catch (Exception e) {
 			str = "{\"success\":\"false\",\"message\":\"Failed to update user information!\"}";

@@ -368,7 +368,7 @@
 		//function add user
 		function addUser() {
 			$("#dlg_addUser").dialog("open").dialog('setTitle',
-			'Add1 User');
+			'Add User');
 			//get category list
 			$(document).ready(function(){
 		            $.ajax({

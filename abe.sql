@@ -48,23 +48,39 @@ CREATE TABLE `category` (
 
 insert  into `category`(`category_id`,`category_name`) values (1,'student'),(2,'teacher');
 
-/*Table structure for table `files` */
+/*Table structure for table `file_att` */
 
-DROP TABLE IF EXISTS `files`;
+DROP TABLE IF EXISTS `file_att`;
 
-CREATE TABLE `files` (
-  `idfile` int NOT NULL,
-  `title` varchar(45) NOT NULL,
-  `desc` varchar(45) DEFAULT NULL,
-  `id` int NOT NULL,
-  `file` blob,
-  PRIMARY KEY (`idfile`),
-  UNIQUE KEY `idfile_UNIQUE` (`idfile`),
-  KEY `user_idx` (`id`),
-  CONSTRAINT `uploader` FOREIGN KEY (`id`) REFERENCES `user_info` (`id`)
+CREATE TABLE `file_att` (
+  `file_id` int NOT NULL,
+  `category_id` int DEFAULT NULL,
+  `attribute_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=gbk;
 
-/*Data for the table `files` */
+/*Data for the table `file_att` */
+
+insert  into `file_att`(`file_id`,`category_id`,`attribute_id`) values (1,1,3),(2,1,1),(6,2,2),(7,1,3);
+
+/*Table structure for table `file_info` */
+
+DROP TABLE IF EXISTS `file_info`;
+
+CREATE TABLE `file_info` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `file_title` varchar(45) CHARACTER SET gbk COLLATE gbk_chinese_ci DEFAULT NULL,
+  `file_describe` varchar(45) CHARACTER SET gbk COLLATE gbk_chinese_ci DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
+  `file_path` varchar(200) CHARACTER SET gbk COLLATE gbk_chinese_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idfile_UNIQUE` (`id`),
+  KEY `user_idx` (`user_id`),
+  CONSTRAINT `uploader` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=gbk;
+
+/*Data for the table `file_info` */
+
+insert  into `file_info`(`id`,`file_title`,`file_describe`,`user_id`,`file_path`) values (1,'Test','Test file',1,'112'),(2,'Test2','Test file',2,'22');
 
 /*Table structure for table `functions` */
 
