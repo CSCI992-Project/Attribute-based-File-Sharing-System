@@ -54,12 +54,12 @@
 				<tr>
 					<th >Username:</th>
 					<td><input class="easyui-textbox" type="text" id="userName"
-						name="userName" data-options="required:false" value=""></input></td>
+						name="userName" data-options="required:true" value=""></input></td>
 				</tr>
 				<tr>
 					<th>Password:</th>
 					<td><input class="easyui-textbox" type="password" id="password"
-						name="password" data-options="required:false" value=""></input></td>
+						name="password" data-options="required:true" value=""></input></td>
 				</tr>
 			</table>
 		</form>

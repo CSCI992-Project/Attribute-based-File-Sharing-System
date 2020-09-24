@@ -41,7 +41,7 @@ public class UserInfoController {
 			return "{\"success\":\"true\",\"message\":\"Login Successful\"}";
 			
 		}else {
-			return "{\"success\":\"false\",\"message\":\"Login Failed\"}";
+			return "{\"success\":\"false\",\"message\":\"Login failed check your account or password!\"}";
 		}
 		
 	}
@@ -105,19 +105,24 @@ public class UserInfoController {
 		String str = "";
 		try {
 			userInfoService.addUserInfo(ui);
-			str = "{\"success\":\"true\",\"message\":\"User information added successfully!\"}";
-		} catch (Exception e) {
-			str = "{\"success\":\"false\",\"message\":\"Failed to add user information!\"}";
-		}
-		if (ui.getUserName() != null) {
 			int user_id = userInfoService.findUserId(ui.getUserName());
 			userInfoService.addUserPowers(user_id, 3);
 			userInfoService.addUserPowers(user_id, 5);
 			userInfoService.addUserPowers(user_id, 8);
-			if (ui.getCategory_id() !=null) {
 			userInfoService.addAttributes(user_id, ui.getCategory_id(), ui.getAttribute_id());
-			}
+			str = "{\"success\":\"true\",\"message\":\"User information added successfully!\"}";
+		} catch (Exception e) {
+			str = "{\"success\":\"false\",\"message\":\"Failed to add user information!\"}";
 		}
+		/*
+		 * if (ui.getUserName() != null) { int user_id =
+		 * userInfoService.findUserId(ui.getUserName());
+		 * userInfoService.addUserPowers(user_id, 3);
+		 * userInfoService.addUserPowers(user_id, 5);
+		 * userInfoService.addUserPowers(user_id, 8); if (ui.getCategory_id() !=null) {
+		 * userInfoService.addAttributes(user_id, ui.getCategory_id(),
+		 * ui.getAttribute_id()); } }
+		 */
 		return str;	
 	}
 	
