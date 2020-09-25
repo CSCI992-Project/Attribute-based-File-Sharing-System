@@ -3,12 +3,16 @@ package com.ecpbm.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.io.File;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ecpbm.pojo.FileInfo;
 import com.ecpbm.pojo.Pager;
@@ -78,8 +82,30 @@ public class FileInfoController {
 	//add file info
 	@RequestMapping(value = "/addFileinfo", produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public String addFileInfo(FileInfo fi) {
+	public String addFileInfo(FileInfo fi,
+			HttpServletRequest request,
+			@RequestParam(value="file") MultipartFile file) throws Exception {
 		String str = "";
+		if(!file.isEmpty())
+		{
+			String path = request.getSession().getServletContext().getRealPath("/uploads/");
+			
+			System.out.println(path);
+			
+			String filename = file.getOriginalFilename();
+			File filepath = new File(path,filename);
+            //判断路径是否存在，如果不存在就创建一个
+            if (!filepath.getParentFile().exists()) {
+                filepath.getParentFile().mkdirs();
+            }
+            //将上传文件保存到一个目标文件当中
+            file.transferTo(filepath);
+            //输出文件上传最终的路径 测试查看
+           // System.out.println(path + File.separator + filename);
+            fi.setFile_path(filename);
+		}
+		
+		
 		try {
 			fileInfoService.addFileInfo(fi);
 			int file_id = fileInfoService.findFileIdByTitle(fi.getFile_title());
@@ -105,6 +131,7 @@ public class FileInfoController {
 		return str;		
 	}
 	
+	
 	//update file info
 	@RequestMapping(value = "updateFileinfo", produces = "text/html;charset=UTF-8")
 	@ResponseBody
@@ -118,5 +145,5 @@ public class FileInfoController {
 		}
 		return str;	
 	}
-	
+		
 }

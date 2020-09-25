@@ -5,9 +5,12 @@
 	if (session.getAttribute("user") == null)
 		response.sendRedirect("/ecpbm/login.jsp");
 %>
+//<script src="js/jquery-2.1.0.js" type="text/javascript"></script>
+//<script src="js/ajaxfileupload.js" type="text/javascript"></script>
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>My Files</title>
 </head>
 <body>
@@ -70,10 +73,9 @@
 					</tr>
 					<tr>
 						<td>File path</td>
-						<td><input class="easyui-textbox" type="text" id="file_path"
-							name="file_path" data-options="required:true"></input></td>
-							<td><a href="javascript:void(0)" class="easyui-linkbutton"
-					onclick="uploadFile();">Upload</a></td>
+						<td><input class="easyui-filebox" id="file"
+							name="file" value="uploadfile"></input></td>
+							<!-- <td><a href="javascript:uploadFile2Server()" class="easyui-linkbutton">Upload</a></td> -->
 					</tr>					
 				</table>
 			</form>
@@ -381,8 +383,9 @@
 			}
 	   	}
 		
+		
 		function clearForm() {
-			$('#ff_userinfo').form('clear');
+			$('#ff_addfileinfo').form('clear');
 		}
 	</script>
 </body>
