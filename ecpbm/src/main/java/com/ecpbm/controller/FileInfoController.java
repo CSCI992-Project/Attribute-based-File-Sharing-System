@@ -88,32 +88,36 @@ public class FileInfoController {
 		String str = "";
 		if(!file.isEmpty())
 		{
-			String path = request.getSession().getServletContext().getRealPath("/uploads/");
-			
-			System.out.println(path);
-			
-			String filename = file.getOriginalFilename();
-			File filepath = new File(path,filename);
-            //判断路径是否存在，如果不存在就创建一个
-            if (!filepath.getParentFile().exists()) {
-                filepath.getParentFile().mkdirs();
-            }
-            //将上传文件保存到一个目标文件当中
-            file.transferTo(filepath);
-            //输出文件上传最终的路径 测试查看
-           // System.out.println(path + File.separator + filename);
-            fi.setFile_path(filename);
+            try {
+            	String path = request.getSession().getServletContext().getRealPath("/uploads/");
+    			
+    			System.out.println(path);
+    			
+    			String filename = file.getOriginalFilename();
+    			File filepath = new File(path,filename);
+                //判断路径是否存在，如果不存在就创建一个
+                if (!filepath.getParentFile().exists()) {
+                    filepath.getParentFile().mkdirs();
+                }
+                //将上传文件保存到一个目标文件当中
+                file.transferTo(filepath);
+                //输出文件上传最终的路径 测试查看
+               // System.out.println(path + File.separator + filename);
+                fi.setFile_path(filename);
+                
+    			fileInfoService.addFileInfo(fi);
+    			int file_id = fileInfoService.findFileIdByTitle(fi.getFile_title());
+    			fileInfoService.addFileAttributes(file_id, fi.getCategory_id(), fi.getAttribute_id());
+    			str = "{\"success\":\"true\",\"message\":\"File information added successfully!\"}";
+    		} catch (Exception e) {
+    			str = "{\"success\":\"false\",\"message\":\"Failed to add file information!\"}";
+    		}
 		}
+		else {
+			str = "{\"success\":\"false\",\"message\":\"Failed to add file information! " + file.getOriginalFilename() + " was empty\"}";
+//			return "You failed to upload \" +  file.getOriginalFilename() + \" because the file was empty.";
+		}	
 		
-		
-		try {
-			fileInfoService.addFileInfo(fi);
-			int file_id = fileInfoService.findFileIdByTitle(fi.getFile_title());
-			fileInfoService.addFileAttributes(file_id, fi.getCategory_id(), fi.getAttribute_id());
-			str = "{\"success\":\"true\",\"message\":\"File information added successfully!\"}";
-		} catch (Exception e) {
-			str = "{\"success\":\"false\",\"message\":\"Failed to add file information!\"}";
-		}
 		return str;	
 	}
 	
