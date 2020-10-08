@@ -38,6 +38,10 @@ public interface FileInfoDao {
 	@Select("select id from file_info where file_title = #{file_title}")
 	Integer findFileIdByTitle(String file_title);
 	
+	//select file path by id
+	@Select("select file_path from file_info where id = #{id}")
+	String findFilePathById(Integer id);
+	
 	//add file
 	@Insert("insert into file_info(file_title,file_describe,user_id,file_path) "
 			+ "values(#{file_title},#{file_describe},#{user_id},#{file_path})")

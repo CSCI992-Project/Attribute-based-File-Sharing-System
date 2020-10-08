@@ -4,9 +4,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.taglibs.standard.extra.spath.Path;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -102,7 +109,7 @@ public class FileInfoController {
                 //将上传文件保存到一个目标文件当中
                 file.transferTo(filepath);
                 //输出文件上传最终的路径 测试查看
-               // System.out.println(path + File.separator + filename);
+                //System.out.println(path + File.separator + filename);
                 fi.setFile_path(filename);
                 
     			fileInfoService.addFileInfo(fi);
@@ -119,6 +126,54 @@ public class FileInfoController {
 		}	
 		
 		return str;	
+	}
+	//download file
+	@RequestMapping(value = "/downloadFileinfo", produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String downloadFileinfo(@RequestParam(value = "id") String id, 
+			HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String str = "";
+		
+		String fileName = fileInfoService.findFilePathById(Integer.parseInt(id));
+		//System.out.print("filename: "+fileName);
+		
+		String path = request.getSession().getServletContext().getRealPath("/uploads/");
+//		System.out.println(path);
+		File filepath = new File(path,fileName);
+		System.out.println("File path: "+filepath);
+		
+		if(filepath.getAbsoluteFile().exists())
+		{
+			response.setContentType("application/x-msdownload;charset=utf-8");
+			
+			response.setHeader("Content-Disposition", "attachment;filename=" + fileName/* "goals.docx" */ );
+			response.setHeader("Content-Length",String.valueOf(filepath.length()));
+			
+		    try {
+			    FileInputStream inputStream = new FileInputStream(filepath);
+			    ServletOutputStream outputStream = response.getOutputStream();
+			    int num = 0;
+			    byte[] b = new byte[1024]; 
+			    while ((num = inputStream.read(b)) != -1) {
+			    	outputStream.write(b, 0, num);
+				}
+			    
+			    inputStream.close();
+			    outputStream.close();
+			    outputStream.flush();
+			    str = "{\"success\":\"true\",\"message\":\"Download file successfully!\"}";
+		    }
+		    catch (IOException e){
+		    	str = "{\"success\":\"false\",\"message\":\"Failed to download file!\"}";
+		    }
+		}
+		else {
+			str = "{\"success\":\"false\",\"message\":\"File not exists!\"}";
+		}
+		
+		
+		
+		return str;
 	}
 	
 	//delete file

@@ -73,8 +73,8 @@
 						<td>File path</td>
 						<td><input class="easyui-textbox" type="text" id="file_path"
 							name="file_path" data-options="required:true"></input></td>
-							<td><a href="javascript:void(0)" class="easyui-linkbutton"
-					onclick="dowloadFile();">Download</a></td>
+							<!-- <td><a href="javascript:void(0)" class="easyui-linkbutton"
+					onclick="dowloadFile();">Download</a></td> -->
 					</tr>					
 				</table>
 			</form>
@@ -103,10 +103,12 @@
 				header : '#searchFileListTb', //为datagrid标头添加搜索栏
 				onLoadSuccess: function () {
 					if (${sessionScope.user.userType} == "1") {
+					  $('.download').linkbutton({ text: 'Download', plain: true, iconCls: 'icon-save' });
 					  $('.detail').linkbutton({ text: 'Detail', plain: true, iconCls: 'icon-edit' }),
 			          $('.delete').linkbutton({ text: 'Delete', plain: true, iconCls: 'icon-no' });
 					} else {
-						$('.detail').linkbutton({ text: 'Detail', plain: true, iconCls: 'icon-edit' });
+						$('.download').linkbutton({ text: 'Download', plain: true, iconCls: 'icon-save' });
+						/* $('.detail').linkbutton({ text: 'Detail', plain: true, iconCls: 'icon-edit' });	 */	
 					}
 			       },
 				columns : [ [ { //编辑datagrid的列
@@ -146,12 +148,14 @@
 					width : 300,
 					formatter : function(value, row, index) {						
 						var str = "";
-			
+						
+						var dloadFileBtnObj = '<a class="download" onclick="FileTabUtil.dloadFileInfo('+ row.file_id +')"></a>';
 			            var fileInfoDetail = '<a class="detail" onclick="FileTabUtil.fileInfoDetail('+ row.file_id +','+index+')"></a>';
 			            var delFileBtnObj = '<a class="delete" onclick="FileTabUtil.deleteFileInfo('+ row.file_id +')"></a>';
-			                    		                    
+			            
+			            str += dloadFileBtnObj;       		                    
 			            str += fileInfoDetail;
-			            str += delFileBtnObj;			            
+			            str += delFileBtnObj;
 			            return str;
 					}
 				} ] ]
@@ -159,6 +163,14 @@
 		});
 		
 		FileTabUtil = {
+				// download file
+				dloadFileInfo : function (id)
+				{
+					//console.log("clicked download button:", id);
+					//console.log(filename);
+					window.open("fileinfo/downloadFileinfo?id=" +id)
+					
+				},
 				// delete user information by user id
 				deleteFileInfo : function (id) {
 					$.messager.confirm('Confirm', 'Are you sure deleting this file?', function(r) {
@@ -253,6 +265,10 @@
 			$('#fileListDg').datagrid('load', {
 				title : title
 			});
+		}
+		function dowloadFile() {
+			console.log("clicked hiden download button");
+			
 		}
 	</script>
 </body>
