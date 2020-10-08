@@ -157,6 +157,7 @@
 				toolbar : '#myFileListTb', //为datagrid添加工具栏
 				header : '#searchMyFileTb', //为datagrid标头添加搜索栏
 				onLoadSuccess: function () {
+					  $('.download').linkbutton({ text: 'Download', plain: true, iconCls: 'icon-save' });
 					  $('.detail').linkbutton({ text: 'Detail', plain: true, iconCls: 'icon-edit' }),
 			          $('.delete').linkbutton({ text: 'Delete', plain: true, iconCls: 'icon-no' });
 			       },
@@ -197,7 +198,8 @@
 					width : 300,
 					formatter : function(value, row, index) {						
 						var str = "";
-			
+						
+						var dloadFileBtnObj = '<a class="download" onclick="FileTabUtil.dloadFileInfo('+ row.file_id +')"></a>';
 			            var fileInfoDetail = '<a class="detail" onclick="FileTabUtil.fileInfoDetail('+ row.file_id +','+index+')"></a>';
 			            var delFileBtnObj = '<a class="delete" onclick="FileTabUtil.deleteFileInfo('+ row.file_id +')"></a>';
 			                    		                    
@@ -210,6 +212,15 @@
 		});
 		
 		FileTabUtil = {
+				// download file
+				dloadFileInfo : function (id)
+				{
+					//console.log("clicked download button:", id);
+					//console.log(filename);
+					window.location.href = "fileinfo/downloadFileinfo?id=" +id;
+				/* 	window.open("fileinfo/downloadFileinfo?id=" +id) */
+					
+				},
 				// delete user information by user id
 				deleteFileInfo : function (id) {
 					$.messager.confirm('Confirm', 'Are you sure deleting this file?', function(r) {
