@@ -6,6 +6,7 @@ import java.util.Map;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -130,9 +131,9 @@ public class FileInfoController {
 	//download file
 	@RequestMapping(value = "/downloadFileinfo", produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public String downloadFileinfo(@RequestParam(value = "id") String id, 
+	public void downloadFileinfo(@RequestParam(value = "id") String id, 
 			HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String str = "";
+		//String str = "";
 		
 		String fileName = fileInfoService.findFilePathById(Integer.parseInt(id));
 		//System.out.print("filename: "+fileName);
@@ -161,19 +162,28 @@ public class FileInfoController {
 			    inputStream.close();
 			    outputStream.close();
 			    outputStream.flush();
-			    str = "{\"success\":\"true\",\"message\":\"Download file successfully!\"}";
+			    //str = "{\"success\":\"true\",\"message\":\"Download file successfully!\"}";
 		    }
 		    catch (IOException e){
-		    	str = "{\"success\":\"false\",\"message\":\"Failed to download file!\"}";
+		    	e.printStackTrace();
+		    	//str = "{\"success\":\"false\",\"message\":\"Failed to download file!\"}";
 		    }
 		}
 		else {
-			str = "{\"success\":\"false\",\"message\":\"File not exists!\"}";
+			 try { 
+                response.setContentType("text/html; charset=UTF-8"); //转码
+                PrintWriter out = response.getWriter();
+                out.flush();
+                out.println("<script defer='defer' type='text/javascript'>");
+                out.println("alert('Download file not exits！');");
+                out.println("history.back();");
+                out.println("</script>");
+            } catch (IOException e) {
+            	e.printStackTrace();
+            }
 		}
-		
-		
-		
-		return str;
+			
+		return ;
 	}
 	
 	//delete file
