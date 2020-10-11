@@ -75,6 +75,12 @@ public class FileInfoServiceImpl implements FileInfoService{
 		// TODO Auto-generated method stub
 		return fileInfoDao.findFileIdByTitle(title);
 	}
+	
+	@Override
+	public String findFilePathById(Integer id) {
+		// TODO Auto-generated method stub
+		return fileInfoDao.findFilePathById(id);
+	}
 
 	@Override
 	public void deleteFileInfo(Integer id) {

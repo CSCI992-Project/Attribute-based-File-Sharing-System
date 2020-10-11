@@ -23,6 +23,9 @@ public interface FileInfoService {
 	//find file id by file title
 	Integer findFileIdByTitle(String title);
 	
+	//find file path by id
+	String findFilePathById(Integer id);
+		
 	//add file
 	void addFileInfo(FileInfo fileInfo);
 	void addFileAttributes(Integer fid, Integer cid, Integer aid);
@@ -32,6 +35,7 @@ public interface FileInfoService {
 	
 	//update file
 	void updateFileInfo(FileInfo fileInfo);
+
 	
 	
 }
