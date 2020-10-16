@@ -262,9 +262,9 @@
 		var data;
 		
 		function searchFileInfo() {
-			var userName = $('#search_title').textbox("getValue");
+			var title = $('#search_title').textbox("getValue");
 			$('#fileListDg').datagrid('load', {
-				title : title
+				file_title : title
 			});
 		}
 		function dowloadFile() {

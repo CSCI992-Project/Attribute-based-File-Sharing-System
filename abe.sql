@@ -46,7 +46,7 @@ CREATE TABLE `category` (
 
 /*Data for the table `category` */
 
-insert  into `category`(`category_id`,`category_name`) values (1,'student'),(2,'teacher');
+insert  into `category`(`category_id`,`category_name`) values (0,'please select'),(1,'student'),(2,'teacher');
 
 /*Table structure for table `file_att` */
 
@@ -60,7 +60,7 @@ CREATE TABLE `file_att` (
 
 /*Data for the table `file_att` */
 
-insert  into `file_att`(`file_id`,`category_id`,`attribute_id`) values (1,1,3),(2,1,1),(6,2,2),(7,1,3);
+insert  into `file_att`(`file_id`,`category_id`,`attribute_id`) values (1,1,3),(2,1,1),(6,2,2),(7,1,3),(8,2,2),(9,2,2),(10,2,2),(11,2,2),(12,2,2),(13,2,0),(14,2,2);
 
 /*Table structure for table `file_info` */
 
@@ -76,11 +76,11 @@ CREATE TABLE `file_info` (
   UNIQUE KEY `idfile_UNIQUE` (`id`),
   KEY `user_idx` (`user_id`),
   CONSTRAINT `uploader` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=gbk;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=gbk;
 
 /*Data for the table `file_info` */
 
-insert  into `file_info`(`id`,`file_title`,`file_describe`,`user_id`,`file_path`) values (1,'Test','Test file',1,'112'),(2,'Test2','Test file',2,'22');
+insert  into `file_info`(`id`,`file_title`,`file_describe`,`user_id`,`file_path`) values (1,'Test','Test file',1,'112'),(2,'Test2','Test file',2,'22'),(13,'TEst444','444',1,'Test file.txt'),(14,'Final','test',1,'Test file.txt');
 
 /*Table structure for table `functions` */
 
@@ -112,7 +112,7 @@ CREATE TABLE `powers` (
 
 /*Data for the table `powers` */
 
-insert  into `powers`(`uid`,`fid`) values (1,3),(1,5),(1,7),(1,8),(2,3),(2,5),(2,8),(32,3),(32,5),(32,8),(33,3),(33,5),(33,8),(34,3),(34,5),(34,8),(35,3),(35,5),(35,8),(36,3),(36,5),(36,8),(37,3),(37,5),(37,8),(38,3),(38,5),(38,8),(39,3),(39,5),(39,8),(40,3),(40,5),(40,8),(41,3),(41,5),(41,8),(42,3),(42,5),(42,8),(43,3),(43,5),(43,8),(45,3),(45,5),(45,8),(46,3),(46,5),(46,8);
+insert  into `powers`(`uid`,`fid`) values (1,3),(1,5),(1,7),(1,8),(2,3),(2,5),(2,8),(32,3),(32,5),(32,8),(33,3),(33,5),(33,8),(34,3),(34,5),(34,8),(35,3),(35,5),(35,8),(36,3),(36,5),(36,8),(37,3),(37,5),(37,8),(38,3),(38,5),(38,8),(39,3),(39,5),(39,8),(40,3),(40,5),(40,8),(41,3),(41,5),(41,8),(42,3),(42,5),(42,8),(43,3),(43,5),(43,8),(45,3),(45,5),(45,8),(46,3),(46,5),(46,8),(47,3),(47,5),(47,8),(48,3),(48,5),(48,8),(49,3),(49,5),(49,8),(50,3),(50,5),(50,8),(51,3),(51,5),(51,8),(52,3),(52,5),(52,8),(53,3),(53,5),(53,8),(54,3),(54,5),(54,8),(55,3),(55,5),(55,8);
 
 /*Table structure for table `user_att` */
 
@@ -127,7 +127,7 @@ CREATE TABLE `user_att` (
 
 /*Data for the table `user_att` */
 
-insert  into `user_att`(`user_id`,`category_id`,`attribute_id`) values (1,1,1),(2,2,2),(34,1,1),(35,NULL,NULL),(36,NULL,NULL),(37,NULL,NULL),(39,1,1),(40,1,3),(41,1,3),(42,1,3),(43,1,3),(45,1,1),(46,1,1);
+insert  into `user_att`(`user_id`,`category_id`,`attribute_id`) values (1,1,1),(2,2,2),(34,1,1),(35,NULL,NULL),(36,NULL,NULL),(37,NULL,NULL),(39,1,1),(40,1,3),(41,1,3),(42,1,3),(43,1,3),(45,1,1),(46,1,1),(47,2,2),(48,2,2),(49,2,2),(50,2,2),(51,2,0),(52,2,2),(53,2,2),(54,2,2),(55,1,1);
 
 /*Table structure for table `user_info` */
 
@@ -142,11 +142,11 @@ CREATE TABLE `user_info` (
   `phone` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=gbk;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=gbk;
 
 /*Data for the table `user_info` */
 
-insert  into `user_info`(`id`,`userName`,`password`,`userType`,`email`,`phone`) values (1,'xk','1',1,'kx876@uowmail.edu.au','88888888'),(2,'mm','123456',2,'12','123'),(40,'zh','1',2,'111@qq.com','1111111'),(41,'wm','1',2,'32','21312'),(42,'wh','1',2,'11111','33333333'),(43,'wa1','1',2,'123','12345'),(45,'wa2','123',2,'123','123');
+insert  into `user_info`(`id`,`userName`,`password`,`userType`,`email`,`phone`) values (1,'admin','1',1,'kx876@uowmail.edu.au','88888888'),(2,'mm','123456',2,'123','1235'),(40,'zh','1',2,'111@qq.com','1111111534'),(55,'aq','1',2,'1123','312312');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

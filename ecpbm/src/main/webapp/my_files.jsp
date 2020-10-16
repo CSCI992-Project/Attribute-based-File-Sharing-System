@@ -344,10 +344,10 @@
 			});
 		}
 		
-		function searchMyFileInfo() {
+		function searchFileInfo() {
 			var title = $('#search_title').textbox("getValue");
-			$('#myfileDg').datagrid('load', {
-				title : title
+			$('#fileListDg').datagrid('load', {
+				file_title : title
 			});
 		}
 		

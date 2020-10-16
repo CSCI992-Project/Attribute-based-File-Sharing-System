@@ -312,20 +312,38 @@
 		                                		attributeList.attribute_id));
 		                    });
 		                    //设置默认选项
-		                    $("#attribute option[value='"+row.attribute_id+"']").attr("selected","selected");
+		                   $("#attribute option[value='"+row.attribute_id+"']").attr("selected","selected");
 		                }
 		            }); 
 					
 					//将select改变项目赋值
 					document.getElementById("category").onchange =function(){
 						//console.log(this.options[this.selectedIndex].value);
-						document.getElementById("category").value=this.options[this.selectedIndex].value;	
+						document.getElementById("category").value=this.options[this.selectedIndex].value;
+						document.getElementById("attribute").options.length=0;  //clear select
+						//console.log(this.options[this.selectedIndex].value);
+						var categoryid = this.options[this.selectedIndex].value;
+						$.ajax({
+			                contentType : "application/json;charset=utf-8",
+			                type : "POST",
+			                url : "attribute/getattribute?categoryId="+categoryid,
+			                dataType : "json",
+			                success : function(data) {
+
+			                    $.each(data, function(i, attributeList) {
+			                        $('#attribute').append(
+			                                $('<option>').text(attributeList.attribute_name).attr('value',
+			                                		attributeList.attribute_id));
+			                    });
+			                }
+			            });
 					}
 					document.getElementById("attribute").onchange =function(){
 						//console.log(this.options[this.selectedIndex].value);
 						document.getElementById("attribute").value=this.options[this.selectedIndex].value;
-					}
-                     } 
+					} 
+          		}		 
+                     
         };
 		
 		//update user information
@@ -377,7 +395,6 @@
 		                url : "category/getcategory",
 		                dataType : "json",
 		                success : function(data) {
-
 		                    $.each(data, function(i, categoryList) {
 		                        $('#category_new').append(
 		                                $('<option>').text(categoryList.category_name).attr('value',
@@ -407,6 +424,13 @@
 	                }
 	            });
 			}
+		}
+		
+		function searchUserInfo() {
+			var userName = $('#search_userName').textbox("getValue");
+			$('#userListDg').datagrid('load', {
+				userName : userName
+			});
 		}
 		
 		function clearForm() {
