@@ -23,6 +23,12 @@ public class CategoryServiceImpl implements CategoryService{
 		// TODO Auto-generated method stub
 		return categoryDao.selectAll();
 	}
+
+	@Override
+	public String getCategoryName(Integer categoryId) {
+		// TODO Auto-generated method stub
+		return categoryDao.getCategoryName(categoryId);
+	}
 	
 	
 }

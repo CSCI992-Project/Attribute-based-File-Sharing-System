@@ -32,8 +32,11 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
 		<attributes>
+			<attribute name="module" value="true"/>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jpbc-api-1.2.1.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jpbc-plaf-1.2.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -1,20 +1,17 @@
 package com.ecpbm.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.taglibs.standard.extra.spath.Path;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ecpbm.pojo.FileInfo;
 import com.ecpbm.pojo.Pager;
-import com.ecpbm.pojo.UserInfo;
+import com.ecpbm.service.CpabeService;
 import com.ecpbm.service.FileInfoService;
 
 @Controller
@@ -33,6 +30,9 @@ public class FileInfoController {
 	
 	@Autowired
 	FileInfoService fileInfoService;
+	
+	@Autowired
+	CpabeService cpabeService;
 	
 	//实现All list功能
 	@RequestMapping("/listallfiles")

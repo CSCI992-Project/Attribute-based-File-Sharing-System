@@ -7,4 +7,7 @@ import com.ecpbm.pojo.Attribute;
 public interface AttributeService {
 	//list all attribute by category id
 	public List<Attribute> getAll(Integer categoryId);
+	
+	//get attribute name
+	public String getAttributeName(Integer attributeId);
 }

@@ -1,5 +1,6 @@
 package com.ecpbm.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -20,6 +21,9 @@ import com.ecpbm.pojo.Functions;
 import com.ecpbm.pojo.Pager;
 import com.ecpbm.pojo.TreeNode;
 import com.ecpbm.pojo.UserInfo;
+import com.ecpbm.service.AttributeService;
+import com.ecpbm.service.CategoryService;
+import com.ecpbm.service.CpabeService;
 import com.ecpbm.service.UserInfoService;
 import com.ecpbm.util.JsonFactory;
 
@@ -30,12 +34,29 @@ public class UserInfoController {
 	@Autowired
 	private UserInfoService userInfoService;
 	
+	@Autowired
+	private CpabeService cpabeService;
+	
+	@Autowired
+	private CategoryService categoryService;
+	
+	@Autowired
+	private AttributeService attributeService;
+	
+	static String dir = "/ecpbm/demo/cpabe/";
+
+    static String pubfile = dir + "/pub_key";
+	static String mskfile = dir + "/master_key";
+	
 	@RequestMapping(value = "/login", produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String login(UserInfo ui, ModelMap model) {
 		
 		UserInfo userInfo = userInfoService.login(ui);
-		
+		/*build public key and master key
+		 * try { cpabeService.setup(pubfile, mskfile); } catch (IOException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
 		if(userInfo != null && userInfo.getUserName() != null) {
 			model.put("user", userInfo);
 			return "{\"success\":\"true\",\"message\":\"Login Successful\"}";
@@ -114,6 +135,9 @@ public class UserInfoController {
 		} catch (Exception e) {
 			str = "{\"success\":\"false\",\"message\":\"Failed to add user information!\"}";
 		}
+		String attr_str = categoryService.getCategoryName(ui.getCategory_id()) + ":"+ attributeService.getAttributeName(ui.getAttribute_id());
+		//attr_str = attr_str + categoryService.getCategoryName(ui.getCategory_id()) + ":"+ attributeService.getAttributeName(ui.getAttribute_id());
+		//cpabeService.keygen(userInfoService.findUserId(ui.getUserName()), attr_str);
 		/*
 		 * if (ui.getUserName() != null) { int user_id =
 		 * userInfoService.findUserId(ui.getUserName());
