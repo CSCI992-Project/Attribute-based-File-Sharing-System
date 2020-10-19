@@ -113,7 +113,7 @@ public class CpabeServiceImpl implements CpabeService{
 	}
 
 	@Override
-	public void dec(String pubfile, String prvfile, String encfile, String decfile) throws Exception {
+	public void dec(String pubfile, byte[] prvfile, String encfile, String decfile) throws Exception {
 		// TODO Auto-generated method stub
 		byte[] aesBuf, cphBuf;
 		byte[] plt;
@@ -135,7 +135,7 @@ public class CpabeServiceImpl implements CpabeService{
 		cph = SerializeUtils.bswabeCphUnserialize(pub, cphBuf);
 		
 		/* get BswabePrv form prvfile */
-		prv_byte = commonService.suckFile(prvfile);
+		prv_byte = prvfile;
 		prv = SerializeUtils.unserializeBswabePrv(pub, prv_byte);
 		
 		BswabeElementBoolean beb = Bswabe.dec(pub, prv, cph);

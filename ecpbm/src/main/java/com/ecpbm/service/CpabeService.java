@@ -15,6 +15,6 @@ public interface CpabeService {
 			String encfile) throws Exception;
 	
 	//decrypt the file
-	public void dec(String pubfile, String prvfile, String encfile,
+	public void dec(String pubfile, byte[] prvfile, String encfile,
 			String decfile) throws Exception;
 }
