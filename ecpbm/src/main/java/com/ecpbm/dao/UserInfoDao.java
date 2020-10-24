@@ -72,6 +72,6 @@ public interface UserInfoDao {
 	Integer findCategory(Integer userid);
 	
 	//select user attribute form user id
-	@Select("select attibute_id from user_att where user_id = #{userid}")
+	@Select("select attribute_id from user_att where user_id = #{userid}")
 	Integer findAttribute(Integer userid);
 }

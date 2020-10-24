@@ -164,7 +164,7 @@
 		
 		FileTabUtil = {
 				// download file
-				dloadFileInfo : function (id)
+				dloadFileInfo : function (id, userid)
 				{
 					//console.log("clicked download button:", id);
 					//console.log(filename);
