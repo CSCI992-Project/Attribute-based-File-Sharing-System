@@ -199,7 +199,7 @@
 					formatter : function(value, row, index) {						
 						var str = "";
 						
-						var dloadFileBtnObj = '<a class="download" onclick="FileTabUtil.dloadFileInfo('+ row.file_id +')"></a>';
+						var dloadFileBtnObj = '<a class="download" onclick="FileTabUtil.dloadFileInfo('+ row.file_id +','+${sessionScope.user.id}+')"></a>';
 			            var fileInfoDetail = '<a class="detail" onclick="FileTabUtil.fileInfoDetail('+ row.file_id +','+index+')"></a>';
 			            var delFileBtnObj = '<a class="delete" onclick="FileTabUtil.deleteFileInfo('+ row.file_id +')"></a>';
 			                    		                    
@@ -213,11 +213,11 @@
 		
 		FileTabUtil = {
 				// download file
-				dloadFileInfo : function (id)
+				dloadFileInfo : function (id, userid)
 				{
 					//console.log("clicked download button:", id);
 					//console.log(filename);
-					window.location.href = "fileinfo/downloadFileinfo?id=" +id;
+					window.location.href = "fileinfo/downloadFileinfo?id=" +id + "&userid=" + userid;
 				/* 	window.open("fileinfo/downloadFileinfo?id=" +id) */
 					
 				},

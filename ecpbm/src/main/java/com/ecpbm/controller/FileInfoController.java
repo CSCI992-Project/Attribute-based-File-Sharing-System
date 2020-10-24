@@ -4,10 +4,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,8 +23,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ecpbm.pojo.FileInfo;
 import com.ecpbm.pojo.Pager;
+import com.ecpbm.service.AttributeService;
+import com.ecpbm.service.CategoryService;
 import com.ecpbm.service.CpabeService;
 import com.ecpbm.service.FileInfoService;
+import com.ecpbm.service.UserInfoService;
 
 @Controller
 @RequestMapping("/fileinfo")
@@ -33,6 +38,15 @@ public class FileInfoController {
 	
 	@Autowired
 	CpabeService cpabeService;
+	
+	@Autowired
+	AttributeService attributeService;
+	
+	@Autowired
+	CategoryService categoryService;
+	
+	@Autowired
+	UserInfoService userInfoservice;
 	
 	//实现All list功能
 	@RequestMapping("/listallfiles")
@@ -97,21 +111,42 @@ public class FileInfoController {
 		if(!file.isEmpty())
 		{
             try {
-            	String path = request.getSession().getServletContext().getRealPath("/uploads/");
+            	String Cpath = request.getSession().getServletContext().getRealPath("/uploads/");		//cipher file
+            	String Ppath = request.getSession().getServletContext().getRealPath("/storeuploads/"); // plain file
     			
-    			System.out.println(path);
+    			System.out.println(Ppath);
     			
     			String filename = file.getOriginalFilename();
-    			File filepath = new File(path,filename);
+    			File filepath = new File(Ppath,filename);
                 //判断路径是否存在，如果不存在就创建一个
                 if (!filepath.getParentFile().exists()) {
                     filepath.getParentFile().mkdirs();
                 }
+            
+                File encpath = new File(Cpath, filename);
+                if(!encpath.getParentFile().exists())
+                {
+                	encpath.getParentFile().mkdirs();
+                }
+                
                 //将上传文件保存到一个目标文件当中
                 file.transferTo(filepath);
+               
+                String pubfile = "/ecpbm/demo/cpabe/pub_key";
+
+                String encfilename = Cpath + filename;
+                String attributes = attributeService.getAttributeName(fi.getAttribute_id());
+                String categorys = categoryService.getCategoryName(fi.getCategory_id());
+                String policy = categorys + ":" + attributes;
+                
+                String inputfile = Ppath + filename;
+                //System.out.println(inputfile);
+                cpabeService.enc(pubfile, policy, inputfile, encfilename);
+                
                 //输出文件上传最终的路径 测试查看
                 //System.out.println(path + File.separator + filename);
-                fi.setFile_path(filename);
+                System.out.println(encfilename);
+                fi.setFile_path(encfilename);
                 
     			fileInfoService.addFileInfo(fi);
     			int file_id = fileInfoService.findFileIdByTitle(fi.getFile_title());
@@ -132,13 +167,35 @@ public class FileInfoController {
 	@RequestMapping(value = "/downloadFileinfo", produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public void downloadFileinfo(@RequestParam(value = "id") String id, 
-			HttpServletRequest request, HttpServletResponse response) throws IOException {
+								@RequestParam(value = "userid") String userid,
+			HttpServletRequest request, HttpServletResponse response) throws IOException, Exception {
 		//String str = "";
 		
 		String fileName = fileInfoService.findFilePathById(Integer.parseInt(id));
 		//System.out.print("filename: "+fileName);
 		
-		String path = request.getSession().getServletContext().getRealPath("/uploads/");
+		// Get decrypted file path
+		String path = request.getSession().getServletContext().getRealPath("/uploads/");	//cipher file
+		// Decrypte ciphertext to plaintext
+		String Dpath = request.getSession().getServletContext().getRealPath("/Decuploads/");// plain file
+		
+        File decpath = new File(Dpath, fileName);
+        if(!decpath.getParentFile().exists())
+        {
+        	decpath.getParentFile().mkdirs();
+        }
+		
+		String pubfile = "/ecpbm/demo/cpabe/pub_key";
+        String mskfile = "/ecpbm/demo/cpabe/master_key";
+        Integer categ_id = userInfoservice.findCategory(Integer.parseInt(userid));
+            
+        String attr_str = categoryService.getCategoryName(categ_id)+":"+attributeService.getAttributeName(userInfoservice.findAttribute(Integer.parseInt(userid))) ;
+		byte[] prvkey = cpabeService.keygen(pubfile, mskfile, attr_str);
+		String encFile = path + fileName;
+		String decFile = Dpath + fileName;
+		cpabeService.dec(pubfile, prvkey, encFile, decFile);
+		
+		
 //		System.out.println(path);
 		File filepath = new File(path,fileName);
 		System.out.println("File path: "+filepath);

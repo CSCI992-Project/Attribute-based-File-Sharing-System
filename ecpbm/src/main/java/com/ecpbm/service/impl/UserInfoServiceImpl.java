@@ -87,4 +87,16 @@ public class UserInfoServiceImpl implements UserInfoService {
 		userInfoDao.updateAtt(userInfo);
 	}
 
+	@Override
+	public Integer findCategory(Integer userid) {
+		// TODO Auto-generated method stub
+		return userInfoDao.findCategory(userid);
+	}
+
+	@Override
+	public Integer findAttribute(Integer userid) {
+		// TODO Auto-generated method stub
+		return userInfoDao.findAttribute(userid);
+	}
+
 }

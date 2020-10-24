@@ -3,6 +3,8 @@ package com.ecpbm.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Select;
+
 import com.ecpbm.pojo.Pager;
 import com.ecpbm.pojo.UserInfo;
 
@@ -36,4 +38,10 @@ public interface UserInfoService {
 	
 	//delete user
 	void deleteUserInfo(Integer id);
+	
+	//select user category from user id
+	Integer findCategory(Integer userid);
+	
+	//select user attribute form user id
+	Integer findAttribute(Integer userid);
 }

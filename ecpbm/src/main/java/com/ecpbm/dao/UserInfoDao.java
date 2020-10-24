@@ -66,4 +66,12 @@ public interface UserInfoDao {
 	//delete user
 	@DeleteProvider(type = UserInfoDynaSqlProvider.class, method = "deleteUserInfo")
 	void deleteUserInfo(Integer id);
+	
+	//select user category from user id
+	@Select("select category_id from user_att where user_id = #{userid}")
+	Integer findCategory(Integer userid);
+	
+	//select user attribute form user id
+	@Select("select attibute_id from user_att where user_id = #{userid}")
+	Integer findAttribute(Integer userid);
 }
