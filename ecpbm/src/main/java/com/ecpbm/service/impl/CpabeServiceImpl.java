@@ -1,5 +1,6 @@
 package com.ecpbm.service.impl;
 
+import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
@@ -92,6 +93,7 @@ public class CpabeServiceImpl implements CpabeService{
 		
 		/* get BswabePub from pubfile */
 		pub_byte = commonService.suckFile(pubfile);
+	
 		pub = SerializeUtils.unserializeBswabePub(pub_byte);
 		
 		keyCph = Bswabe.enc(pub, policy);
@@ -109,7 +111,9 @@ public class CpabeServiceImpl implements CpabeService{
 		/* read file to encrypted */
 		plt = commonService.suckFile(inputfile);
 		aesBuf = aesCoderService.encrypt(m.toBytes(), plt);
+		
 		commonService.writeCpabeFile(encfile, cphBuf, aesBuf);
+		
 	}
 
 	@Override
@@ -139,13 +143,15 @@ public class CpabeServiceImpl implements CpabeService{
 		prv = SerializeUtils.unserializeBswabePrv(pub, prv_byte);
 		
 		BswabeElementBoolean beb = Bswabe.dec(pub, prv, cph);
-		System.err.println("e = " + beb.e.toString());
+		
 		
 		if (beb.b) {
+			System.err.println("e = " + beb.e.toString());
 			plt = aesCoderService.decrypt(beb.e.toBytes(), aesBuf);
 			commonService.spitFile(decfile, plt);
 		} else {
-			System.exit(0);
+			System.out.println("function(dec) error!");
+			//System.exit(0);
 		}
 	}
 

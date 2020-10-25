@@ -169,7 +169,10 @@
 					//console.log("clicked download button:", id);
 					//console.log(filename);
 					window.location.href = "fileinfo/downloadFileinfo?id=" +id + "&userid=" + userid;
-				/* 	window.open("fileinfo/downloadFileinfo?id=" +id) */
+					$.messager.show({
+						title : 'Tips',
+						msg : result.message
+					})
 					
 				},
 				// delete user information by user id
