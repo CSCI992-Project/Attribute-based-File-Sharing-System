@@ -32,7 +32,7 @@ CREATE TABLE `attribute` (
 
 /*Data for the table `attribute` */
 
-insert  into `attribute`(`attribute_id`,`category_id`,`attribute_name`) values (0,2,'isit'),(1,1,'csci'),(2,2,'925'),(3,1,'uow');
+insert  into `attribute`(`attribute_id`,`category_id`,`attribute_name`) values (0,1,'FIN960'),(1,1,'ECON940'),(2,1,'FIN924'),(3,1,'FIN926'),(4,1,'FIN958'),(5,1,'FIN959'),(7,1,'MGNT909'),(8,1,'MBA906'),(9,2,'SNPG950'),(10,2,'SNPG923'),(11,2,'SNPG903'),(12,2,'SNPG915'),(13,2,'HSNP950'),(14,2,'HSNP923'),(15,2,'HSNP903'),(16,2,'HSNP915'),(17,3,'CSCI814'),(18,3,'CSCI851'),(19,3,'CSCI803'),(20,3,'CSCI835'),(21,3,'CSCI862'),(22,3,'CSIT826'),(23,3,'ISIT925'),(24,3,'CSIT940'),(25,3,'CSCI920'),(26,3,'CSCI992'),(27,3,'CSCI971'),(28,4,'EDGT817'),(29,4,'EDGT830'),(30,4,'EDGT838'),(31,4,'EDGT835'),(32,4,'EDGT890'),(33,4,'EDGT931'),(34,4,'EDGT932'),(35,4,'EDGT984'),(36,5,'SEA901'),(37,5,'SEA902'),(38,5,'SEA914'),(39,5,'SEA915'),(40,5,'SEA916'),(41,5,'SEA917'),(42,5,'SEA918'),(43,5,'SEA920'),(44,6,'THES925'),(45,6,'THES913'),(46,6,'RESH802'),(47,6,'GWP800');
 
 /*Table structure for table `category` */
 
@@ -46,7 +46,7 @@ CREATE TABLE `category` (
 
 /*Data for the table `category` */
 
-insert  into `category`(`category_id`,`category_name`) values (0,'please select'),(1,'student'),(2,'teacher');
+insert  into `category`(`category_id`,`category_name`) values (0,'please select'),(1,'Business'),(2,'Nursing'),(3,'CSIT'),(4,'Education'),(5,'Law'),(6,'Physics');
 
 /*Table structure for table `file_att` */
 
@@ -59,8 +59,6 @@ CREATE TABLE `file_att` (
 ) ENGINE=InnoDB DEFAULT CHARSET=gbk;
 
 /*Data for the table `file_att` */
-
-insert  into `file_att`(`file_id`,`category_id`,`attribute_id`) values (1,1,3),(2,1,1),(6,2,2),(7,1,3),(8,2,2),(9,2,2),(10,2,2),(11,2,2),(12,2,2),(13,2,0),(14,2,2);
 
 /*Table structure for table `file_info` */
 
@@ -76,11 +74,9 @@ CREATE TABLE `file_info` (
   UNIQUE KEY `idfile_UNIQUE` (`id`),
   KEY `user_idx` (`user_id`),
   CONSTRAINT `uploader` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=gbk;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=gbk;
 
 /*Data for the table `file_info` */
-
-insert  into `file_info`(`id`,`file_title`,`file_describe`,`user_id`,`file_path`) values (1,'Test','Test file',1,'112'),(2,'Test2','Test file',2,'22'),(13,'TEst444','444',1,'Test file.txt'),(14,'Final','test',1,'Test file.txt');
 
 /*Table structure for table `functions` */
 
@@ -112,7 +108,7 @@ CREATE TABLE `powers` (
 
 /*Data for the table `powers` */
 
-insert  into `powers`(`uid`,`fid`) values (1,3),(1,5),(1,7),(1,8),(2,3),(2,5),(2,8),(32,3),(32,5),(32,8),(33,3),(33,5),(33,8),(34,3),(34,5),(34,8),(35,3),(35,5),(35,8),(36,3),(36,5),(36,8),(37,3),(37,5),(37,8),(38,3),(38,5),(38,8),(39,3),(39,5),(39,8),(40,3),(40,5),(40,8),(41,3),(41,5),(41,8),(42,3),(42,5),(42,8),(43,3),(43,5),(43,8),(45,3),(45,5),(45,8),(46,3),(46,5),(46,8),(47,3),(47,5),(47,8),(48,3),(48,5),(48,8),(49,3),(49,5),(49,8),(50,3),(50,5),(50,8),(51,3),(51,5),(51,8),(52,3),(52,5),(52,8),(53,3),(53,5),(53,8),(54,3),(54,5),(54,8),(55,3),(55,5),(55,8),(56,3),(56,5),(56,8),(57,3),(57,5),(57,8),(58,3),(58,5),(58,8),(59,3),(59,5),(59,8),(62,3),(62,5),(62,8),(63,3),(63,5),(63,8),(64,3),(64,5),(64,8),(65,3),(65,5),(65,8),(66,3),(66,5),(66,8),(67,3),(67,5),(67,8),(68,3),(68,5),(68,8),(69,3),(69,5),(69,8),(70,3),(70,5),(70,8),(71,3),(71,5),(71,8),(72,3),(72,5),(72,8);
+insert  into `powers`(`uid`,`fid`) values (1,3),(1,5),(1,7),(1,8),(73,3),(73,5),(73,8),(74,3),(74,5),(74,8),(75,3),(75,5),(75,8),(76,3),(76,5),(76,8),(77,3),(77,5),(77,8),(78,3),(78,5),(78,8),(79,3),(79,5),(79,8),(80,3),(80,5),(80,8),(81,3),(81,5),(81,8),(82,3),(82,5),(82,8),(83,3),(83,5),(83,8),(84,3),(84,5),(84,8),(85,3),(85,5),(85,8),(86,3),(86,5),(86,8),(87,3),(87,5),(87,8),(88,3),(88,5),(88,8),(89,3),(89,5),(89,8),(90,3),(90,5),(90,8),(91,3),(91,5),(91,8),(92,3),(92,5),(92,8);
 
 /*Table structure for table `user_att` */
 
@@ -127,7 +123,7 @@ CREATE TABLE `user_att` (
 
 /*Data for the table `user_att` */
 
-insert  into `user_att`(`user_id`,`category_id`,`attribute_id`) values (1,1,1),(2,2,2),(34,1,1),(35,NULL,NULL),(36,NULL,NULL),(37,NULL,NULL),(39,1,1),(40,1,3),(41,1,3),(42,1,3),(43,1,3),(45,1,1),(46,1,1),(47,2,2),(48,2,2),(49,2,2),(50,2,2),(51,2,0),(52,2,2),(53,2,2),(54,2,2),(55,1,1),(56,1,3),(57,1,3),(58,2,2),(59,1,1),(62,1,3),(63,1,1),(64,1,1),(65,1,1),(66,1,1),(67,1,1),(68,1,3),(69,1,3),(70,1,1),(71,2,0),(72,1,1);
+insert  into `user_att`(`user_id`,`category_id`,`attribute_id`) values (1,3,26),(73,3,26),(74,3,26),(75,3,18),(76,3,26),(77,1,1),(78,2,11),(79,4,30),(80,5,39),(81,6,46),(82,6,46),(83,5,39),(84,2,12),(85,3,19),(86,3,27),(87,4,28),(88,2,13),(89,4,32),(90,2,14),(91,6,46),(92,3,20);
 
 /*Table structure for table `user_info` */
 
@@ -142,11 +138,11 @@ CREATE TABLE `user_info` (
   `phone` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=gbk;
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=gbk;
 
 /*Data for the table `user_info` */
 
-insert  into `user_info`(`id`,`userName`,`password`,`userType`,`email`,`phone`) values (1,'admin','1',1,'kx876@uowmail.edu.au','88888888'),(2,'mm','123456',2,'123','1235'),(40,'zh','1',2,'111@qq.com','1111111534'),(55,'aq','1',2,'1123','312312'),(56,'ww','1',2,'123','123'),(71,'wqe','1',2,'123','123'),(72,'qqwe','1',2,'123','123');
+insert  into `user_info`(`id`,`userName`,`password`,`userType`,`email`,`phone`) values (1,'admin','1',1,'abe@uowmail.edu.au','0424888888'),(73,'aq610','1',4,'ag610@uowmail.edu.au','0424662513'),(74,'mm736','1',4,'mm736@uowmail.edu.au','0424558992'),(75,'kx876','1',4,'kx876@uowmail.edu.au','0424886520'),(76,'hz546','1',4,'hx546@uowmail.edu.au','0424469846'),(77,'ww485','1',2,'ww485@uowmail.edu.au','0411512345'),(78,'ad154','1',3,'ad154@uowmail.edu.au','0422125468'),(79,'ss159','1',3,'ss159@uowmail.edu.au','0422125896'),(80,'gf561','1',4,'gf561@uowmail.edu.au','0413157489'),(81,'bb154','1',2,'bb154@uowmail.edu.au','0423546879'),(82,'gr889','1',3,'gr889@uowmail.edu.au','0433548762'),(83,'ew234','1',4,'ew234@uowmail.edu.au','0422658963'),(84,'hg874','1',4,'hg874@uowmail.edu.au','0421451287'),(85,'wl845','1',4,'wl845@uowmail.edu.au','0422654823'),(86,'yg668','1',2,'yg668@uowmail.edu.au','0424556874'),(87,'gr124','1',4,'gr124@uowmail.edu.au','0242563214'),(88,'jk655','1',4,'jk655@uowmail.edu.au','0423541254'),(89,'as154','1',3,'as154@uowmail.edu.au','0142563214'),(90,'gg124','1',3,'gg124@uowmail.edu.au','0423651235'),(91,'gh223','1',4,'gh223','0433157856'),(92,'fg564','1',2,'fg564@uowmail.edu.au','0423568796');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

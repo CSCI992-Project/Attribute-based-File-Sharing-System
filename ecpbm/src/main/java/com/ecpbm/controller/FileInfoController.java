@@ -48,9 +48,22 @@ public class FileInfoController {
 	@Autowired
 	UserInfoService userInfoservice;
 	
-	static String pubfile = "C:\\Users\\miaomiao\\992 project\\Attribute-based-File-Sharing-System\\ecpbm\\demo\\cpabe\\pub_key";
-    static String mskfile = "C:\\Users\\miaomiao\\992 project\\Attribute-based-File-Sharing-System\\ecpbm\\demo\\cpabe\\master_key";
+	/*
+	 * static String pubfile =
+	 * "C:\\Users\\miaomiao\\992 project\\Attribute-based-File-Sharing-System\\ecpbm\\demo\\cpabe\\pub_key"
+	 * ; static String mskfile =
+	 * "C:\\Users\\miaomiao\\992 project\\Attribute-based-File-Sharing-System\\ecpbm\\demo\\cpabe\\master_key"
+	 * ;
+	 */
 	
+	/*
+	 * static String pubfile =
+	 * "G:\\Project\\Attribute-based-File-Sharing-System\\ecpbm\\demo\\cpabe\\pub_key";
+	 * static String mskfile =
+	 * "G:\\Project\\Attribute-based-File-Sharing-System\\ecpbm\\demo\\cpabe\\master_key";
+	 */
+	static String pubfile = "root\\apache-tomcat-9.0.39\\webapps\\ecpbm\\demo\\cpabe\\pub_key";
+	static String mskfile = "root\\apache-tomcat-9.0.39\\webapps\\ecpbm\\demo\\cpabe\\master_key";
 	//实现All list功能
 	@RequestMapping("/listallfiles")
 	@ResponseBody

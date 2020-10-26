@@ -24,7 +24,7 @@
 			<div style="font-family: Microsoft YaHei; font-size: 16px;">Attribute based File Sharing System</div>
 		</div>
 		<div align="right">
-			Welcome,<font color="Red">${sessionScope.user.userName}</font>
+			Welcome,<font color="Red">${sessionScope.user.userName}(${sessionScope.user.category},${sessionScope.user.attribute})</font>
 		</div>
 	</div>
 	<div data-options="region:'west',split:true,title:'Menu'"

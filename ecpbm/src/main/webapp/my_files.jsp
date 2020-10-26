@@ -52,7 +52,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td>Category:</td>
+						<td>College:</td>
 						<td><select id="category_new" 
 							name="category_id" style="width: 173px;" 
 							>
@@ -65,11 +65,11 @@
 						</td>
 					</tr>
 					<tr>
-						<td>Attribute:</td>
+						<td>Subject:</td>
 						<td><select id="attribute_new"
 							name="attribute_id" style="width: 173px;"
 							>
-							<option>select category first</option></select></td>
+							<option>select college first</option></select></td>
 					</tr>
 					<tr>
 						<td>File path</td>
@@ -110,7 +110,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td>Category:</td>
+						<td>College:</td>
 						<td><select id="category" 
 							name="category_id" style="width: 173px;" 
 							>
@@ -123,11 +123,11 @@
 						</td>
 					</tr>
 					<tr>
-						<td>Attribute:</td>
+						<td>Subject:</td>
 						<td><select id="attribute"
 							name="attribute_id" style="width: 173px;"
 							>
-							<option>select category first</option></select></td>
+							<option>select college first</option></select></td>
 					</tr>
 					<tr>
 						<td>File path</td>
@@ -183,12 +183,12 @@
 					width : 150
 				}, {
 					field : 'category_name',
-					title : 'category',
+					title : 'college',
 					align : 'center',
 					width : 200
 				}, {
 					field : 'attribute_name',
-					title : 'attribute',
+					title : 'subject',
 					align : 'center',
 					width : 200
 				},  {

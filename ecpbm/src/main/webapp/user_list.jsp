@@ -58,7 +58,9 @@
 						<td><select id="userType" class="easyui-combobox" name="userType"
 							style="width: 173px;">
 								<option value="1">Administrator</option>
-								<option value="2">User</option>
+								<option value="2">Lecturer</option>
+								<option value="3">Tutor</option>
+								<option value="4">Student</option>
 						</select></td>
 					</tr>
 					<tr>
@@ -72,7 +74,7 @@
 							name="phone"></input></td>
 					</tr>
 					<tr>
-						<td>Category:</td>
+						<td>College:</td>
 						<td><select id="category" 
 							name="category_id" style="width: 173px;" 
 							>
@@ -80,11 +82,11 @@
 							</td>
 					</tr>
 					<tr>
-						<td>Attribute:</td>
+						<td>Subject:</td>
 						<td><select id="attribute"
 							name="attribute_id" style="width: 173px;"
 							>
-							<option>select category first</option></select></td>
+							<option>select college first</option></select></td>
 					</tr>					
 				</table>
 			</form>
@@ -118,7 +120,9 @@
 						<td><select id="userType" class="easyui-combobox" name="userType"
 							style="width: 173px;">
 								<option value="1">Administrator</option>
-								<option value="2">User</option>
+								<option value="2">Lecturer</option>
+								<option value="3">Tutor</option>
+								<option value="4">Student</option>
 						</select></td>
 					</tr>
 					<tr>
@@ -132,7 +136,7 @@
 							name="phone"></input></td>
 					</tr>
 					<tr>
-						<td>Category:</td>
+						<td>College:</td>
 						<td><select id="category_new" 
 							name="category_id" style="width: 173px;" 
 							>
@@ -140,11 +144,11 @@
 							</td>
 					</tr>
 					<tr>
-						<td>Attribute:</td>
+						<td>Subject:</td>
 						<td><select id="attribute_new"
 							name="attribute_id" style="width: 173px;"
 							>
-							<option>select category first</option></select></td>
+							<option>select college first</option></select></td>
 					</tr>					
 				</table>
 			</form>
@@ -192,8 +196,12 @@
 					formatter : function(value, row, index) {
 						if (row.userType==1) {
 							return "Administrator";
+						} else if (row.userType==2){
+							return "Lecturer";
+						} else if (row.userType==3) {
+							return "Tutor";
 						} else {
-							return "User";
+							return "Student";
 						}
 					}
 				}, {
@@ -208,12 +216,12 @@
 					width : 150
 				} , {
 					field : 'category',
-					title : 'category',
+					title : 'college',
 					align : 'center',
-					width : 200
+					width : 300
 				} , {
 					field : 'attribute',
-					title : 'attribute',
+					title : 'subject',
 					align : 'center',
 					width : 200
 				} , {

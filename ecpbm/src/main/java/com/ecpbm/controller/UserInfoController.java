@@ -58,6 +58,12 @@ public class UserInfoController {
 		 * Auto-generated catch block e.printStackTrace(); }
 		 */
 		if(userInfo != null && userInfo.getUserName() != null) {
+			Integer userCategoryId = userInfoService.findCategory(userInfo.getId());
+			Integer userAttributeId = userInfoService.findAttribute(userInfo.getId());
+			String categoryName = categoryService.getCategoryName(userCategoryId);
+			String attributeName = attributeService.getAttributeName(userAttributeId);
+			userInfo.setCategory(categoryName);
+			userInfo.setAttribute(attributeName);
 			model.put("user", userInfo);
 			return "{\"success\":\"true\",\"message\":\"Login Successful\"}";
 			
