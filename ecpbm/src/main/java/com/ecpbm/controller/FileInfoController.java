@@ -48,13 +48,11 @@ public class FileInfoController {
 	@Autowired
 	UserInfoService userInfoservice;
 	
-	/*
-	 * static String pubfile =
-	 * "C:\\Users\\miaomiao\\992 project\\Attribute-based-File-Sharing-System\\ecpbm\\demo\\cpabe\\pub_key"
-	 * ; static String mskfile =
-	 * "C:\\Users\\miaomiao\\992 project\\Attribute-based-File-Sharing-System\\ecpbm\\demo\\cpabe\\master_key"
-	 * ;
-	 */
+	  static String pubfile =
+	  "C:\\Users\\miaomiao\\992 project\\Attribute-based-File-Sharing-System\\ecpbm\\demo\\cpabe\\pub_key"
+	  ; static String mskfile =
+	  "C:\\Users\\miaomiao\\992 project\\Attribute-based-File-Sharing-System\\ecpbm\\demo\\cpabe\\master_key"
+	  ;
 	
 	/*
 	 * static String pubfile =
@@ -62,8 +60,8 @@ public class FileInfoController {
 	 * static String mskfile =
 	 * "G:\\Project\\Attribute-based-File-Sharing-System\\ecpbm\\demo\\cpabe\\master_key";
 	 */
-	static String pubfile = "root\\apache-tomcat-9.0.39\\webapps\\ecpbm\\demo\\cpabe\\pub_key";
-	static String mskfile = "root\\apache-tomcat-9.0.39\\webapps\\ecpbm\\demo\\cpabe\\master_key";
+//	static String pubfile = "root\\apache-tomcat-9.0.39\\webapps\\ecpbm\\demo\\cpabe\\pub_key";
+//	static String mskfile = "root\\apache-tomcat-9.0.39\\webapps\\ecpbm\\demo\\cpabe\\master_key";
 	//实现All list功能
 	@RequestMapping("/listallfiles")
 	@ResponseBody
@@ -125,7 +123,7 @@ public class FileInfoController {
 			@RequestParam(value="file") MultipartFile file) throws Exception {
 		String str = "";
 		if(!file.isEmpty())
-		{
+		{ 
             try {
             	String Cpath = request.getSession().getServletContext().getRealPath("/uploads/");		//cipher file
             	String Ppath = request.getSession().getServletContext().getRealPath("/storeuploads/"); // plain file
@@ -162,13 +160,17 @@ public class FileInfoController {
                 System.out.println(encfilename);
                 filepath.delete();
                 fi.setFile_path(encfilename);
-                
+                System.out.println("----1----");
     			fileInfoService.addFileInfo(fi);
+    			
     			int file_id = fileInfoService.findFileIdByTitle(fi.getFile_title());
+    			
     			fileInfoService.addFileAttributes(file_id, fi.getCategory_id(), fi.getAttribute_id());
+    			System.out.println("------- 2 -------");
     			str = "{\"success\":\"true\",\"message\":\"File information added successfully!\"}";
     		} catch (Exception e) {
-    			str = "{\"success\":\"false\",\"message\":\"Failed to add file information!\"}";
+    			e.printStackTrace();
+    			str = "{\"success\":\"false\",\"message\":\"Failed to add file information! " + file.getOriginalFilename() +"too large!\"}";
     		}
 		}
 		else {
@@ -180,7 +182,7 @@ public class FileInfoController {
 	//download file
 	@RequestMapping(value = "/downloadFileinfo", produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public String downloadFileinfo(@RequestParam(value = "id") String id, 
+	public void downloadFileinfo(@RequestParam(value = "id") String id, 
 								@RequestParam(value = "userid") String userid,
 			HttpServletRequest request, HttpServletResponse response) throws IOException, Exception {
 		String str = "";
@@ -234,18 +236,32 @@ public class FileInfoController {
 			    outputStream.close();
 			    outputStream.flush();
 			    filepath.delete();
-			    str = "{\"success\":\"true\",\"message\":\"Download file successfully!\"}";
+//			    str = "{\"success\":\"true\",\"message\":\"Download file successfully!\"}";
 		    }
 		    catch (IOException e){
 		    	e.printStackTrace();
-		    	str = "{\"success\":\"false\",\"message\":\"Failed to download file!\"}";
+//		    	str = "{\"success\":\"false\",\"message\":\"Failed to download file!\"}";
+		    	response.setContentType("text/html; charset=UTF-8"); //转码
+	             PrintWriter out = response.getWriter();
+	             out.flush();
+	             out.println("<script defer='defer' type='text/javascript'>");
+	             out.println("alert('Failed to download file! Please download again.');");
+	             out.println("history.back();");
+	             out.println("</script>");
 		    }
 		}
 		else {
-			str = "{\"success\":\"false\",\"message\":\"You don't have the authority to download this file!\"}";
+//			str = "{\"success\":\"false\",\"message\":\"You don't have the authority to download this file!\"}";
+			 response.setContentType("text/html; charset=UTF-8"); //转码
+             PrintWriter out = response.getWriter();
+             out.flush();
+             out.println("<script defer='defer' type='text/javascript'>");
+             out.println("alert('You have no authority to download this file!');");
+             out.println("history.back();");
+             out.println("</script>");
 		}
-			
-		return str;
+			return;
+//		return str;
 	}
 	
 	//delete file
