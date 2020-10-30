@@ -160,17 +160,17 @@ public class FileInfoController {
                 System.out.println(encfilename);
                 filepath.delete();
                 fi.setFile_path(encfilename);
-                System.out.println("----1----");
+                
     			fileInfoService.addFileInfo(fi);
     			
     			int file_id = fileInfoService.findFileIdByTitle(fi.getFile_title());
     			
     			fileInfoService.addFileAttributes(file_id, fi.getCategory_id(), fi.getAttribute_id());
-    			System.out.println("------- 2 -------");
+    			
     			str = "{\"success\":\"true\",\"message\":\"File information added successfully!\"}";
     		} catch (Exception e) {
     			e.printStackTrace();
-    			str = "{\"success\":\"false\",\"message\":\"Failed to add file information! " + file.getOriginalFilename() +"too large!\"}";
+    			str = "{\"success\":\"false\",\"message\":\"Failed to add file information!\"}";
     		}
 		}
 		else {
