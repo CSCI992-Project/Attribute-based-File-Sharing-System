@@ -149,7 +149,7 @@ public class FileInfoController {
                 String encfilename = Cpath + filename;
                 String attributes = attributeService.getAttributeName(fi.getAttribute_id());
                 String categorys = categoryService.getCategoryName(fi.getCategory_id());
-                String policy = categorys + ":" + attributes;
+                String policy = categorys + ":" + attributes + " admin:admin 1of2";
                 
                 String inputfile = Ppath + filename;
                 //System.out.println(inputfile);
@@ -206,6 +206,10 @@ public class FileInfoController {
         Integer categ_id = userInfoservice.findCategory(Integer.parseInt(userid));
             
         String attr_str = categoryService.getCategoryName(categ_id)+":"+attributeService.getAttributeName(userInfoservice.findAttribute(Integer.parseInt(userid))) ;
+	Integer uid = Integer.parseInt(userid);
+        if(userInfoservice.getUserInfoAndFunctions(uid).getUserType() == 1) {
+        	attr_str = attr_str + " admin:admin";
+        }
 		byte[] prvkey = cpabeService.keygen(pubfile, mskfile, attr_str);
 		String encFile = path + fileName;
 		String decFile = Dpath + fileName;
