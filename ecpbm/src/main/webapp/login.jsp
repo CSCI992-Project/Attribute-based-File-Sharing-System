@@ -21,7 +21,7 @@
         bottom: 0;
     }
 </style>
-<body background="background.jpg">
+<body background="uow.jpg">
 	<script type="text/javascript">
 		function clearForm() {
 			$('#userLoginForm').form('clear');
